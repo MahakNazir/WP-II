@@ -1,0 +1,164 @@
+@use postcss-nested;
+@import url('https://fonts.googleapis.com/css?family=Lobster'); /* Import the new font */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #887b8a; /* Light gray background */
+  color: #333; /* Text color */
+  font-family: Arial, sans-serif;
+}
+
+h1, p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.5rem; /* Slightly smaller font size */
+  font-family: 'Lobster', cursive; /* Change to the desired font */
+}
+
+small {
+  display: block;
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  transition: opacity 0.33s;
+}
+
+textarea, input, button {
+  line-height: 1.5rem;
+  border: 1px solid #ccc; /* Add a border to input elements */
+  outline: none;
+  font-family: inherit;
+  appearance: none;
+}
+
+textarea, input {
+  color: #333;
+  background-color: #fff; /* White background for input elements */
+}
+
+textarea {
+  width: 100%;
+  height: 8rem;
+  resize: none;
+}
+
+input {
+  width: 100%; /* Full width for input fields */
+  margin-bottom: 1rem;
+}
+
+input[type="text"]:invalid,
+input[type="email"]:invalid {
+  box-shadow: none; /* Remove the red box-shadow for invalid input fields */
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: #4285f4; /* Gmail blue */
+  color: #fff;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+button:hover, button:focus {
+  outline: none;
+  background-color: #966494;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  background-color: #fff;
+  outline: none;
+}
+
+.wrapper {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box-shadow */
+  border-radius: 4px; /* Add rounded corners */
+  margin: 2rem auto;
+  max-width: 600px; /* Limit the width for a centered layout */
+}
+
+.letter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%; /* Full width for the letter */
+  margin: auto;
+}
+
+.side {
+  background-color: #fff; /* White background for letter sides */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box-shadow */
+  padding: 2rem;
+  text-align: left;
+  border-radius: 4px; /* Add rounded corners */
+  margin-bottom: 1rem;
+}
+
+.side:nth-of-type(2) {
+  text-align: right;
+}
+
+.envelope {
+  display: none; /* Hide the envelopes */
+}
+
+.sent {
+  & .letter {
+    animation: scaleLetter 1s forwards ease-in;
+  }
+  & .side:nth-of-type(1) {
+    transform-origin: 0 100%;
+    animation: closeLetter 0.66s forwards ease-in;
+  }
+  & .side:nth-of-type(1) h1, .side:nth-of-type(1) textarea {
+    animation: fadeOutText 0.66s forwards linear;
+  }
+  & button {
+    background-color: #ccc; /* Disable the button after sending */
+    cursor: not-allowed;
+  }
+  & .envelope {
+    display: block; /* Show the envelope */
+  }
+  & small {
+    opacity: 0;
+  }
+}
+
+.centered {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 1rem auto;
+}
+
+@keyframes closeLetter {
+  50% { transform: rotateX(-90deg); }
+  100% { transform: rotateX(-180deg); }
+}
+
+@keyframes fadeOutText {
+  49% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes scaleLetter {
+  66% { transform: translateY(-8rem) scale(0.5, 0.5); }
+  75% { transform: translateY(-8rem) scale(0.5, 0.5); }
+  90% { transform: translateY(-8rem) scale(0.3, 0.5); }
+  97% { transform: translateY(-8rem) scale(0.33, 0.5); }
+  100% { transform: translateY(-8rem) scale(0.3, 0.5); }
+}
